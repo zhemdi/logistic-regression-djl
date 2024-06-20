@@ -3,6 +3,7 @@
 This project implements a simple binary logistic regression using the Deep Java Library (DJL) in Scala.
 
 ## Project Structure
+```bash
 logistic-regression-djl/
 ├── src/
 │   ├── main/
@@ -28,6 +29,7 @@ logistic-regression-djl/
     ├── design.md
     ├── architecture.md
     └── usage.md
+```
 
 
 ## Setup

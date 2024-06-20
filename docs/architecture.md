@@ -4,6 +4,7 @@
 The project is structured following the standard Scala project conventions. It is organized into different components to separate concerns and improve maintainability.
 
 ## Directory Structure
+```bash
 logistic-regression-djl/
 ├── src/
 │   ├── main/
@@ -29,6 +30,7 @@ logistic-regression-djl/
     ├── design.md
     ├── architecture.md
     └── usage.md
+```
 
 
 ## Components
