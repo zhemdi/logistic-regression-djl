@@ -1,26 +1,20 @@
 package com.example.logisticregression
 
 import ai.djl.ndarray.NDManager
+import ai.djl.ndarray.types.Shape
 
-object Main {
-  def main(args: Array[String]): Unit = {
-    // Create a new NDManager, which is responsible for managing the lifecycle of NDArrays
-    val manager = NDManager.newBaseManager()
-    
-    // Create an instance of DataLoader to load the training data
-    val dataLoader = new DataLoader(manager)
-    val trainingFeatures = dataLoader.loadTrainingFeatures()
-    val trainingLabels = dataLoader.loadTrainingLabels()
+object Main extends App {
+  val manager: NDManager = NDManager.newBaseManager()
 
-    // Initialize the logistic regression model
-    val model = new LogisticRegression(manager)
-    
-    // Train the model with the training data
-    model.train(trainingFeatures, trainingLabels, epochs = 1000, learningRate = 0.01f)
+  // Use DataLoader to load training data
+  val dataLoader = new DataLoader(manager)
+  val features = dataLoader.loadTrainingFeatures()
+  val labels = dataLoader.loadTrainingLabels()
 
-    // Test the model with a sample test feature
-    val testFeatures = manager.create(Array(5.0f, 6.0f))
-    val prediction = model.predict(testFeatures)
-    println(s"Prediction: ${prediction.getFloat()}")
-  }
+  val inputSize: Long = features.getShape.get(1)
+  val model = new LogisticRegression(manager, inputSize)
+
+  model.train(features, labels, epochs = 10000, learningRate = 0.001f)
+  val predictions = model.predict(features)
+  println(predictions)
 }

@@ -1,12 +1,16 @@
 package com.example.logisticregression
 
 import ai.djl.ndarray.NDArray
+import ai.djl.ndarray.NDManager
 
 object Utils {
-  // Compute binary cross-entropy loss
-  def binaryCrossEntropyLoss(yTrue: NDArray, yPred: NDArray): NDArray = {
-    val epsilon = 1e-15f
-    val yPredClipped = yPred.clip(epsilon, 1.0f - epsilon)
-    yTrue.mul(yPredClipped.log()).add(yTrue.neg().add(1).mul(yPredClipped.neg().add(1).log())).mean().neg()
+  def sigmoid(x: NDArray): NDArray = {
+    x.exp().div(x.exp().add(1))
+  }
+
+  def binaryCrossEntropyLoss(labels: NDArray, predictions: NDArray): NDArray = {
+    val one = labels.getManager.ones(labels.getShape)
+    val loss = labels.mul(predictions.log()).add(labels.neg().add(one).mul(predictions.neg().add(one).log())).neg()
+    loss.mean()
   }
 }
