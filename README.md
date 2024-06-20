@@ -5,29 +5,29 @@ This project implements a simple binary logistic regression using the Deep Java 
 ## Project Structure
 logistic-regression-djl/
 ├── src/
-│ ├── main/
-│ │ ├── scala/
-│ │ │ └── com/
-│ │ │ └── example/
-│ │ │ └── logisticregression/
-│ │ │ ├── Main.scala
-│ │ │ ├── LogisticRegression.scala
-│ │ │ ├── DataLoader.scala
-│ │ │ └── Utils.scala
-│ ├── test/
-│ │ ├── scala/
-│ │ │ └── com/
-│ │ │ └── example/
-│ │ │ └── logisticregression/
-│ │ │ ├── LogisticRegressionTest.scala
-│ │ │ └── DataLoaderTest.scala
+│   ├── main/
+│   │   ├── scala/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── logisticregression/
+│   │   │               ├── Main.scala
+│   │   │               ├── LogisticRegression.scala
+│   │   │               ├── DataLoader.scala
+│   │   │               └── Utils.scala
+│   ├── test/
+│   │   ├── scala/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── logisticregression/
+│   │   │               ├── LogisticRegressionTest.scala
+│   │   │               └── DataLoaderTest.scala
 ├── build.sbt
 ├── README.md
 ├── .gitignore
 └── docs/
-├── design.md
-├── architecture.md
-└── usage.md
+    ├── design.md
+    ├── architecture.md
+    └── usage.md
 
 
 ## Setup
