@@ -21,3 +21,17 @@ To run the project, execute the `Main` class:
 ```bash
 sbt run
 ```
+
+## Loading Datasets
+
+### Boston Dataset
+To load and process the Boston housing dataset, the `BostonLoader` class converts the median value of owner-occupied homes (medv) into a binary label.
+
+### Breast Cancer Dataset
+The `BreastCancerLoader` class processes the Wisconsin Diagnostic Breast Cancer dataset, distinguishing between malignant and benign cases.
+
+### Iris Dataset
+The `IrisLoader` class uses the Iris dataset, but only includes `Iris-setosa` and `Iris-versicolor` for binary classification.
+
+### Wine Dataset
+The `WineLoader` class processes the Wine dataset and considers only the first two classes for binary classification.

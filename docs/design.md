@@ -16,3 +16,11 @@ Handles data loading and preprocessing. This includes loading training features 
 
 ### Utils
 Contains utility functions used across the project, such as the binary cross-entropy loss calculation.
+
+## Datasets
+The project includes loaders for several datasets, each handling the downloading and preprocessing of data for binary classification tasks:
+
+- **Boston Dataset**: Converts the median value of owner-occupied homes (medv) into a binary label.
+- **Breast Cancer Dataset**: Distinguishes between malignant and benign cases.
+- **Iris Dataset**: Uses only `Iris-setosa` and `Iris-versicolor` for binary classification.
+- **Wine Dataset**: Considers only the first two classes for binary classification.

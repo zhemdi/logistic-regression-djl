@@ -6,32 +6,36 @@ The project is structured following the standard Scala project conventions. It i
 ## Directory Structure
 ```bash
 logistic-regression-djl/
+├── docs/
+│   ├── architecture.md
+│   ├── design.md
+│   └── usage.md
 ├── src/
 │   ├── main/
 │   │   ├── scala/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── logisticregression/
-│   │   │               ├── Main.scala
-│   │   │               ├── LogisticRegression.scala
-│   │   │               ├── DataLoader.scala
-│   │   │               └── Utils.scala
+│   │   │               ├── loaders/
+│   │   │               │   ├── BostonLoader.scala
+│   │   │               │   ├── BreastCancerLoader.scala
+│   │   │               │   ├── FileLoader.scala
+│   │   │               │   ├── IrisLoader.scala
+│   │   │               │   └── WineLoader.scala
+│   │   │               ├── utils/
+│   │   │               │   ├── DataLoader.scala
+│   │   │               │   ├── LogisticRegression.scala
+│   │   │               │   └── Main.scala
 │   ├── test/
 │   │   ├── scala/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── logisticregression/
-│   │   │               ├── LogisticRegressionTest.scala
-│   │   │               └── DataLoaderTest.scala
-├── build.sbt
+│   │   │               ├── DataLoaderTest.scala
+│   │   │               └── LogisticRegressionTest.scala
 ├── README.md
-├── .gitignore
-└── docs/
-    ├── design.md
-    ├── architecture.md
-    └── usage.md
+└── build.sbt
 ```
-
 
 ## Components
 
