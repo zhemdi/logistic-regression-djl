@@ -33,6 +33,11 @@ logistic-regression-djl/
 │   │   │           └── logisticregression/
 │   │   │               ├── DataLoaderTest.scala
 │   │   │               └── LogisticRegressionTest.scala
+├── config/
+│   ├── boston_config.json
+│   ├── breast_cancer_config.json
+│   ├── iris_config.json
+│   ├── wine_config.json
 ├── README.md
 └── build.sbt
 ```
@@ -55,3 +60,6 @@ Provides utility functions such as the binary cross-entropy loss calculation.
 The project uses the following dependencies managed by SBT:
 - DJL (Deep Java Library) for machine learning operations.
 - ScalaTest for unit testing.
+
+
+

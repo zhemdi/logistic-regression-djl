@@ -17,10 +17,36 @@ sbt update
 
 ## Running the Project
 
-To run the project, execute the `Main` class:
+To run the project, execute the `Main` class with a specific config file:
 ```bash
-sbt run
+sbt "run <config_file>"
 ```
+
+For example, to run the project with the Iris dataset configuration:
+```bash
+sbt "run config/iris_config.json"
+```
+
+### Specifying a Custom Dataset
+
+If you want to use a custom dataset, you can specify the `datasetPath` in your config file:
+
+```json
+{
+  "datasetName": "custom",
+  "datasetPath": "path/to/your/dataset.csv",
+  ...
+}
+```
+
+The dataset should be a CSV file with the features in the columns and the label in the last column.
+
+### Available Config Files
+
+- `config/boston_config.json`: Configuration for the Boston Housing dataset.
+- `config/breast_cancer_config.json`: Configuration for the Breast Cancer dataset.
+- `config/iris_config.json`: Configuration for the Iris dataset.
+- `config/wine_config.json`: Configuration for the Wine dataset.
 
 ## Running Tests
 
@@ -35,17 +61,3 @@ This will execute all tests in the `test` directory and provide you with the res
 
 - `DataLoaderTest.scala`: Ensures that the data loading functionalities are working correctly.
 - `LogisticRegressionTest.scala`: Verifies that the logistic regression model trains and predicts as expected.
-
-## Loading Datasets
-
-### Boston Dataset
-To load and process the Boston housing dataset, the `BostonLoader` class converts the median value of owner-occupied homes (medv) into a binary label.
-
-### Breast Cancer Dataset
-The `BreastCancerLoader` class processes the Wisconsin Diagnostic Breast Cancer dataset, distinguishing between malignant and benign cases.
-
-### Iris Dataset
-The `IrisLoader` class uses the Iris dataset, but only includes `Iris-setosa` and `Iris-versicolor` for binary classification.
-
-### Wine Dataset
-The `WineLoader` class processes the Wine dataset and considers only the first two classes for binary classification.

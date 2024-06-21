@@ -5,10 +5,6 @@ This project implements a simple binary logistic regression using the Deep Java 
 ## Project Structure
 ```bash
 logistic-regression-djl/
-├── docs/
-│   ├── architecture.md
-│   ├── design.md
-│   └── usage.md
 ├── src/
 │   ├── main/
 │   │   ├── scala/
@@ -20,22 +16,31 @@ logistic-regression-djl/
 │   │   │               │   ├── BreastCancerLoader.scala
 │   │   │               │   ├── FileLoader.scala
 │   │   │               │   ├── IrisLoader.scala
-│   │   │               │   └── WineLoader.scala
+│   │   │               │   ├── WineLoader.scala
 │   │   │               ├── utils/
+│   │   │               │   ├── ConfigLoader.scala
 │   │   │               │   ├── DataLoader.scala
 │   │   │               │   ├── LogisticRegression.scala
-│   │   │               │   └── Main.scala
+│   │   │               │   ├── Main.scala
 │   ├── test/
 │   │   ├── scala/
 │   │   │   └── com/
 │   │   │       └── example/
 │   │   │           └── logisticregression/
 │   │   │               ├── DataLoaderTest.scala
-│   │   │               └── LogisticRegressionTest.scala
+│   │   │               ├── LogisticRegressionTest.scala
+├── config/
+│   ├── boston_config.json
+│   ├── breast_cancer_config.json
+│   ├── iris_config.json
+│   ├── wine_config.json
+├── docs/
+│   ├── design.md
+│   ├── architecture.md
+│   ├── usage.md
+├── build.sbt
 ├── README.md
-└── build.sbt
 ```
-
 
 ## Setup
 
@@ -45,8 +50,40 @@ logistic-regression-djl/
 
 ## Usage
 
-Run the `Main` class to train the logistic regression model and make predictions.
+### Running the Project
 
+To run the project, execute the `Main` class with a specific config file:
+
+```bash
+sbt "run <config_file>"
+```
+
+For example, to run the project with the Iris dataset configuration:
+
+```bash
+sbt "run config/iris_config.json"
+```
+
+### Specifying a Custom Dataset
+
+If you want to use a custom dataset, you can specify the `datasetPath` in your config file:
+
+```json
+{
+  "datasetName": "custom",
+  "datasetPath": "path/to/your/dataset.csv",
+  ...
+}
+```
+
+The dataset should be a CSV file with the features in the columns and the label in the last column.
+
+### Available Config Files
+
+- `config/boston_config.json`: Configuration for the Boston Housing dataset.
+- `config/breast_cancer_config.json`: Configuration for the Breast Cancer dataset.
+- `config/iris_config.json`: Configuration for the Iris dataset.
+- `config/wine_config.json`: Configuration for the Wine dataset.
 
 ## Running Tests
 
@@ -63,35 +100,27 @@ sbt test
 ## Loading Datasets
 
 ### Boston Dataset
-
 The `BostonLoader` class in the `loaders` package downloads and processes the Boston housing dataset, converting the median value of owner-occupied homes (medv) into a binary label for logistic regression.
 
-- Label `0`: If `medv` is lower than the mean.
-- Label `1`: If `medv` is equal to or greater than the mean.
-
-### Breast Cancer Dataset
-
-The `BreastCancerLoader` class downloads and processes the Wisconsin Diagnostic Breast Cancer dataset. The dataset is used for binary classification to determine if the cancer is malignant or benign.
-
-- Label `0`: Benign (B)
-- Label `1`: Malignant (M)
+- Label `0`: If `medv` is lower than the median.
+- Label `1`: If `medv` is higher than or equal to the median.
 
 ### Iris Dataset
-
-The `IrisLoader` class downloads and processes the Iris dataset. For binary classification, the dataset only includes `Iris-setosa` and `Iris-versicolor`, excluding `Iris-virginica`.
+The `IrisLoader` class in the `loaders` package downloads and processes the Iris dataset, converting the classes into a binary classification problem.
 
 - Label `0`: Iris-setosa
 - Label `1`: Iris-versicolor
+- The Iris-virginica class is ignored to maintain a binary classification problem.
+
+### Breast Cancer Dataset
+The `BreastCancerLoader` class in the `loaders` package downloads and processes the Breast Cancer Wisconsin dataset, converting the diagnosis into a binary label.
+
+- Label `0`: Benign
+- Label `1`: Malignant
 
 ### Wine Dataset
+The `WineLoader` class in the `loaders` package downloads and processes the Wine dataset, converting the classes into a binary classification problem.
 
-The `WineLoader` class downloads and processes the Wine dataset. For binary classification, the dataset includes only the first two classes, converting the class labels from {1, 2} to {0, 1}.
-
-- Label `0`: First class
-- Label `1`: Second class
-
-## Dependencies
-
-The project uses the following dependencies managed by SBT:
-- DJL (Deep Java Library) for machine learning operations.
-- ScalaTest for unit testing.
+- Label `0`: Class 1
+- Label `1`: Class 2
+- The Class 3 is ignored to maintain a binary classification problem.
