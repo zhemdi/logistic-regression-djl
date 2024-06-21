@@ -1,20 +1,46 @@
 package com.example.logisticregression
 
 import ai.djl.ndarray.NDManager
-import ai.djl.ndarray.types.Shape
+import com.example.logisticregression.utils.ConfigLoader
 
-object Main extends App {
-  val manager: NDManager = NDManager.newBaseManager()
+object Main {
+  def main(args: Array[String]): Unit = {
+    if (args.length != 1) {
+      println("Usage: sbt run <config-file-path>")
+      System.exit(1)
+    }
 
-  // Use DataLoader to load training data
-  val dataLoader = new DataLoader(manager)
-  val features = dataLoader.loadTrainingFeatures()
-  val labels = dataLoader.loadTrainingLabels()
+    val configFileName = args(0)
+    val configFilePath = s"./config/$configFileName"
+    val manager = NDManager.newBaseManager()
 
-  val inputSize: Long = features.getShape.get(1)
-  val model = new LogisticRegression(manager, inputSize)
+    val config = ConfigLoader.loadConfig(configFilePath)
 
-  model.train(features, labels, epochs = 10000, learningRate = 0.001f)
-  val predictions = model.predict(features)
-  println(predictions)
+    println(config("datasetName"))
+
+    val (rawFeatures, labels) = DataLoader.loadDataset(manager, config)
+
+    // Normalize features
+    val features = Utils.normalizeFeatures(rawFeatures)
+
+    val (trainFeatures, trainLabels, valFeatures, valLabels, testFeatures, testLabels) = DataLoader.trainValTestSplit(
+      manager, features, labels, config("valRatio").toFloat, config("testRatio").toFloat
+    )
+
+    // println(features.getShape)
+    // println(labels.getShape)
+
+    val model = new LogisticRegression(manager, features.getShape.get(1))
+
+    model.train(trainFeatures, trainLabels, valFeatures, valLabels, config("epochs").toInt, config("learningRate").toFloat, earlyStop = true)
+    
+    
+    // Evaluate on the test set
+    val testPredictions = model.predict(testFeatures)
+    val testLoss = Utils.binaryCrossEntropyLoss(testLabels, model.predictProbabilities(testFeatures))
+    val testAccuracy = model.calculateAccuracy(testPredictions, testLabels)
+
+    println(s"Test Loss: ${testLoss.getFloat()}")
+    println(s"Test Accuracy: $testAccuracy")
+  }
 }
