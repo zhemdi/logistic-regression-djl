@@ -1,0 +1,10 @@
+{
+    "datasetName": "wine",
+    "datasetPath": "",
+    "learningRate": 0.01,
+    "epochs": 1000,
+    "trainRatio": 0.7,
+    "valRatio": 0.15,
+    "testRatio": 0.15
+  }
+  

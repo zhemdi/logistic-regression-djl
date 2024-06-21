@@ -1,0 +1,9 @@
+{
+    "datasetName": "breast_cancer",
+    "datasetPath": "",
+    "learningRate": 0.001,
+    "epochs": 1000,
+    "trainRatio": 0.7,
+    "valRatio": 0.15,
+    "testRatio": 0.15
+  }
