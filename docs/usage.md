@@ -22,6 +22,20 @@ To run the project, execute the `Main` class:
 sbt run
 ```
 
+## Running Tests
+
+To run the tests for the project, use the following command:
+```bash
+sbt test
+```
+
+This will execute all tests in the `test` directory and provide you with the results.
+
+### Test Details
+
+- `DataLoaderTest.scala`: Ensures that the data loading functionalities are working correctly.
+- `LogisticRegressionTest.scala`: Verifies that the logistic regression model trains and predicts as expected.
+
 ## Loading Datasets
 
 ### Boston Dataset

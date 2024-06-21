@@ -47,6 +47,19 @@ logistic-regression-djl/
 
 Run the `Main` class to train the logistic regression model and make predictions.
 
+
+## Running Tests
+
+To ensure everything is working correctly, you can run the tests included in this project. Use the following command to run all tests:
+
+```bash
+sbt test
+```
+
+### Test Files
+- `DataLoaderTest.scala`: Tests for the data loading functionality.
+- `LogisticRegressionTest.scala`: Tests for the logistic regression model training and prediction.
+
 ## Loading Datasets
 
 ### Boston Dataset
