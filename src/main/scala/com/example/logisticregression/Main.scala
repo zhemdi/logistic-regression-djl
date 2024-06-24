@@ -23,24 +23,42 @@ object Main {
     // Normalize features
     val features = Utils.normalizeFeatures(rawFeatures)
 
-    val (trainFeatures, trainLabels, valFeatures, valLabels, testFeatures, testLabels) = DataLoader.trainValTestSplit(
-      manager, features, labels, config("valRatio").toFloat, config("testRatio").toFloat
-    )
+    if (config("mode") == "train") {
+      val (trainFeatures, trainLabels, valFeatures, valLabels, testFeatures, testLabels) = DataLoader.trainValTestSplit(
+        manager, features, labels, config("valRatio").toFloat, config("testRatio").toFloat
+      )
 
-    // println(features.getShape)
-    // println(labels.getShape)
+      val model = new LogisticRegression(manager, features.getShape.get(1))
 
-    val model = new LogisticRegression(manager, features.getShape.get(1))
+      
 
-    model.train(trainFeatures, trainLabels, valFeatures, valLabels, config("epochs").toInt, config("learningRate").toFloat, earlyStop = true)
-    
-    
-    // Evaluate on the test set
-    val testPredictions = model.predict(testFeatures)
-    val testLoss = Utils.binaryCrossEntropyLoss(testLabels, model.predictProbabilities(testFeatures))
-    val testAccuracy = model.calculateAccuracy(testPredictions, testLabels)
+      // Train the model
+      model.train(trainFeatures, trainLabels, valFeatures, valLabels, config("epochs").toInt, config("learningRate").toFloat, earlyStop = true)
+      
+      // Save the trained model
+      model.saveModel(config("modelPathToSave"))
+      
+      // Evaluate on the test set
+      val testPredictions = model.predict(testFeatures)
+      val testLoss = Utils.binaryCrossEntropyLoss(testLabels, model.predictProbabilities(testFeatures))
+      val testAccuracy = model.calculateAccuracy(testPredictions, testLabels)
 
-    println(s"Test Loss: ${testLoss.getFloat()}")
-    println(s"Test Accuracy: $testAccuracy")
+      println(s"Test Loss: ${testLoss.getFloat()}")
+      println(s"Test Accuracy: $testAccuracy")
+    } else if (config("mode") == "inference") {
+      val model = new LogisticRegression(manager, features.getShape.get(1))
+      model.loadModel(config("modelPathToLoad"))
+
+      // Perform inference on the entire dataset
+      val predictions = model.predict(features)
+      val loss = Utils.binaryCrossEntropyLoss(labels, model.predictProbabilities(features))
+      val accuracy = model.calculateAccuracy(predictions, labels)
+
+      println(s"Loss: ${loss.getFloat()}")
+      println(s"Accuracy: $accuracy")
+    } else {
+      println("Invalid mode specified. Please set mode to 'train' or 'inference' in the config file.")
+    }
   }
 }
+

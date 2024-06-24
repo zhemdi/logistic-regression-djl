@@ -1,8 +1,8 @@
 {   
-    "mode": "train",
+    "mode": "inference",
     "datasetName": "boston",
     "datasetPath": "",
-    "modelPathToSave": "models/boston_model",
+    "modelPathToLoad": "models/boston_model",
     "learningRate": 0.01,
     "epochs": 1000,
     "trainRatio": 0.7,

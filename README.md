@@ -85,6 +85,34 @@ The dataset should be a CSV file with the features in the columns and the label 
 - `config/iris_config.json`: Configuration for the Iris dataset.
 - `config/wine_config.json`: Configuration for the Wine dataset.
 
+
+### Saving and Loading Models
+
+You can save the trained logistic regression model to a file and load it later for prediction.
+
+#### Saving the Model
+
+To save the model after training, specify the directory where you want to store the model files in your config file:
+
+```json
+{
+  "modelPathToSave": "path/to/save/model"
+}
+```
+
+The model will be saved in the specified directory.
+
+#### Loading the Model
+
+To load a saved model, specify the directory of the saved model files in your config file:
+
+```json
+{
+  "loadModel": true,
+  "modelPathToLoad": "path/to/load/model"
+}
+```
+
 ## Running Tests
 
 To ensure everything is working correctly, you can run the tests included in this project. Use the following command to run all tests:

@@ -1,11 +1,12 @@
-{   
-    "mode": "train",
-    "datasetName": "boston",
+{
+    "mode": "inference",
+    "datasetName": "wine",
     "datasetPath": "",
-    "modelPathToSave": "models/boston_model",
+    "modelPathToLoad": "models/wine_model",
     "learningRate": 0.01,
     "epochs": 1000,
     "trainRatio": 0.7,
     "valRatio": 0.15,
     "testRatio": 0.15
   }
+  
