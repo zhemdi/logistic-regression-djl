@@ -6,30 +6,22 @@ This project implements a simple binary logistic regression using the Deep Java 
 ```bash
 logistic-regression-djl/
 ├── src/
-│   ├── main/
-│   │   ├── scala/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── logisticregression/
-│   │   │               ├── loaders/
-│   │   │               │   ├── BostonLoader.scala
-│   │   │               │   ├── BreastCancerLoader.scala
-│   │   │               │   ├── FileLoader.scala
-│   │   │               │   ├── IrisLoader.scala
-│   │   │               │   ├── WineLoader.scala
-│   │   │               ├── utils/
-│   │   │               │   ├── ConfigLoader.scala
-│   │   │               │   ├── Utils.scala
-│   │   │               ├── DataLoader.scala
-│   │   │               ├── LogisticRegression.scala
-│   │   │               ├── Main.scala
-│   ├── test/
-│   │   ├── scala/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── logisticregression/
-│   │   │               ├── DataLoaderTest.scala
-│   │   │               ├── LogisticRegressionTest.scala
+│   ├── main/scala/com/example/logisticregression/
+│   │   ├── loaders/
+│   │   │   ├── BostonLoader.scala
+│   │   │   ├── BreastCancerLoader.scala
+│   │   │   ├── FileLoader.scala
+│   │   │   ├── IrisLoader.scala
+│   │   │   ├── WineLoader.scala
+│   │   ├── utils/
+│   │   │   ├── ConfigLoader.scala
+│   │   │   ├── Utils.scala
+│   │   ├── DataLoader.scala
+│   │   ├── LogisticRegression.scala
+│   │   ├── Main.scala
+│   ├── test/scala/com/example/logisticregression/
+│   │   ├── DataLoaderTest.scala
+│   │   ├── LogisticRegressionTest.scala
 ├── config/
 │   ├── boston_config.json
 │   ├── boston_inference_config.json
